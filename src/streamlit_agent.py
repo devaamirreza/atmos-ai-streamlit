@@ -1,5 +1,7 @@
 import os
 import json
+import streamlit as st
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -11,8 +13,17 @@ load_dotenv()
 
 api_key = os.getenv("OPENROUTER_API_KEY")
 
+# Check Streamlit Cloud secrets
+try:
+    api_key = st.secrets.get("OPENROUTER_API_KEY", api_key)
+except (FileNotFoundError, KeyError):
+    pass
+
 if not api_key:
-    raise ValueError("OPENROUTER_API_KEY not found in .env file")
+    raise ValueError(
+        "OPENROUTER_API_KEY is missing. "
+        "Add it to your .env file or Streamlit Cloud secrets."
+    )
 
 
 # 2. Connect to OpenRouter
