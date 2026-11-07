@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code workspace settings
+.vscode/
+
+# Local development test files
+src/test_ai.py
+src/test_connection.py
