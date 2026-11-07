@@ -508,8 +508,13 @@ if check_weather:
 
         if "error" in data:
             st.error(data["error"])
+
         else:
             st.session_state.weather_data = data
+
+            # Refresh the application so analytics
+            # displays the newly selected city.
+            st.rerun()
 
     else:
         st.warning("Please enter a city name.")
