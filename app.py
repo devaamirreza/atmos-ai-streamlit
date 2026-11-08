@@ -51,7 +51,6 @@ THEMES = {
         "banner2": "#0891B2",
         "input": "#FFFFFF"
     },
-
     "Night": {
         "bg": "#0B1220",
         "surface": "#131F32",
@@ -234,13 +233,13 @@ div[role="radiogroup"] label {{
     border-radius: 12px;
     padding: 11px 17px;
     margin: 8px 0 16px 0;
-    color: white;
+    color: #FFFFFF;
 }}
 
 .location-name {{
     font-size: 19px;
     font-weight: 800;
-    color: white;
+    color: #FFFFFF;
 }}
 
 .location-caption {{
@@ -282,95 +281,69 @@ div[role="radiogroup"] label {{
 }}
 
 
-/* ==========================================
-   INPUT FIELDS
-========================================== */
+/* INPUT FIELDS */
 
 .stTextInput input,
 .stChatInput textarea,
 [data-testid="stChatInput"] textarea {{
-
     background-color: {theme['input']} !important;
     color: {theme['text']} !important;
-
     border: 1px solid {theme['border']} !important;
     border-radius: 9px !important;
-
     font-weight: 500 !important;
     opacity: 1 !important;
 }}
 
-/* Always-visible placeholder hints */
-
 .stTextInput input::placeholder,
 .stChatInput textarea::placeholder,
 [data-testid="stChatInput"] textarea::placeholder {{
-
     color: {theme['muted']} !important;
     opacity: 1 !important;
 }}
 
-/* Input focus */
-
 .stTextInput input:focus,
 .stChatInput textarea:focus,
 [data-testid="stChatInput"] textarea:focus {{
-
     border: 1px solid {theme['accent']} !important;
     box-shadow: 0 0 0 2px {theme['accent']}22 !important;
     outline: none !important;
 }}
 
 
-/* ==========================================
-   CHECK WEATHER BUTTON - BLUE
-========================================== */
+/* CHECK WEATHER BUTTON - BLUE */
 
 .stButton button[kind="primary"] {{
-
     background-color: #1D4ED8 !important;
     color: #FFFFFF !important;
-
     border: 1px solid #1D4ED8 !important;
     border-radius: 9px !important;
-
     font-weight: 700 !important;
     min-height: 37px;
 }}
 
 .stButton button[kind="primary"]:hover {{
-
     background-color: #1E40AF !important;
     border-color: #1E40AF !important;
     color: #FFFFFF !important;
 }}
 
 
-/* ==========================================
-   CLEAR CHAT BUTTON - RED
-========================================== */
+/* CLEAR CHAT BUTTON - RED */
 
 .stButton button[kind="secondary"] {{
-
     background-color: #DC2626 !important;
     color: #FFFFFF !important;
-
     border: 1px solid #DC2626 !important;
     border-radius: 9px !important;
-
     font-weight: 700 !important;
     min-height: 37px;
 }}
 
 .stButton button[kind="secondary"]:hover {{
-
     background-color: #B91C1C !important;
     border-color: #B91C1C !important;
     color: #FFFFFF !important;
 }}
-
-
-/* Force button text and icons to remain white */
 
 .stButton button[kind="primary"] *,
 .stButton button[kind="secondary"] * {{
@@ -378,9 +351,7 @@ div[role="radiogroup"] label {{
 }}
 
 
-/* ==========================================
-   CHAT INTERFACE
-========================================== */
+/* CHAT INTERFACE */
 
 .chat-panel {{
     background: {theme['surface']};
@@ -404,6 +375,65 @@ div[role="radiogroup"] label {{
     border-radius: 11px;
 }}
 
+
+/* CHAT RESPONSE TEXT: EXPLICIT THEME COLOURS */
+
+/* Main markdown text, paragraphs, headings and lists */
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"],
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] li,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] span,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] strong,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] em,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] h1,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] h2,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] h3,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] h4,
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] blockquote {{
+    color: {theme['text']} !important;
+}}
+
+/* Tables: this fixes dark text on dark backgrounds */
+[data-testid="stChatMessage"] table,
+[data-testid="stChatMessage"] thead,
+[data-testid="stChatMessage"] tbody,
+[data-testid="stChatMessage"] tr,
+[data-testid="stChatMessage"] th,
+[data-testid="stChatMessage"] td {{
+    color: {theme['text']} !important;
+    border-color: {theme['border']} !important;
+}}
+
+[data-testid="stChatMessage"] table {{
+    border-collapse: collapse !important;
+    width: 100%;
+}}
+
+[data-testid="stChatMessage"] th,
+[data-testid="stChatMessage"] td {{
+    padding: 9px 12px !important;
+    text-align: left;
+}}
+
+[data-testid="stChatMessage"] th {{
+    font-weight: 700 !important;
+    background: {theme['card']} !important;
+}}
+
+[data-testid="stChatMessage"] a {{
+    color: {theme['accent']} !important;
+}}
+
+[data-testid="stChatMessage"] code,
+[data-testid="stChatMessage"] pre {{
+    color: {theme['text']} !important;
+}}
+
+[data-testid="stChatMessage"] pre {{
+    background: {theme['card']} !important;
+    border: 1px solid {theme['border']} !important;
+    border-radius: 8px;
+}}
 
 /* Dividers */
 
@@ -462,7 +492,6 @@ for col, label, value in analytics:
         </div>
         """, unsafe_allow_html=True)
 
-
 st.divider()
 
 
@@ -500,22 +529,15 @@ with button_col:
 
 
 if check_weather:
-
     if city.strip():
-
         with st.spinner("Fetching weather..."):
             data = get_weather(city.strip())
 
         if "error" in data:
             st.error(data["error"])
-
         else:
             st.session_state.weather_data = data
-
-            # Refresh the application so analytics
-            # displays the newly selected city.
             st.rerun()
-
     else:
         st.warning("Please enter a city name.")
 
@@ -527,7 +549,6 @@ if check_weather:
 weather = st.session_state.weather_data
 
 if weather:
-
     st.markdown(f"""
     <div class="location-banner">
         <div class="location-name">
@@ -559,9 +580,7 @@ if weather:
                 <div class="card-value">{value}</div>
             </div>
             """, unsafe_allow_html=True)
-
 else:
-
     st.info("🌤️ Search for a city to view its current weather.")
 
 
@@ -590,7 +609,6 @@ with clear_col:
         st.session_state.token_usage = 0
         st.rerun()
 
-
 st.markdown(
     '<div class="section-subtitle">'
     'Compare cities, ask weather questions and explore conditions naturally.'
@@ -604,9 +622,7 @@ st.markdown(
 # =====================================================
 
 with st.container(height=190, border=True):
-
     if not st.session_state.messages:
-
         st.markdown(
             f"""
             <div style="
@@ -622,11 +638,8 @@ with st.container(height=190, border=True):
             """,
             unsafe_allow_html=True
         )
-
     else:
-
         for message in st.session_state.messages:
-
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
 
@@ -640,16 +653,13 @@ user_query = st.chat_input(
 )
 
 if user_query:
-
     st.session_state.messages.append({
         "role": "user",
         "content": user_query
     })
 
     with st.spinner("Atmos AI is thinking..."):
-
         try:
-
             result = run_streamlit_agent(
                 user_query,
                 st.session_state.conversation_history
@@ -674,13 +684,13 @@ if user_query:
             })
 
         except Exception as error:
-
+            error_message = f"Something went wrong: {error}"
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"Something went wrong: {error}"
+                "content": error_message
             })
 
-    # Refresh chat history and analytics after processing the message.
+    # Redraw the page so chat history and analytics update immediately.
     st.rerun()
 
 
