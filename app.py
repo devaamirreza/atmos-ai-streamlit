@@ -675,7 +675,13 @@ if user_query:
 
         except Exception as error:
 
-            st.error(f"Something went wrong: {error}")
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": f"Something went wrong: {error}"
+            })
+
+    # Refresh chat history and analytics after processing the message.
+    st.rerun()
 
 
 # =====================================================
